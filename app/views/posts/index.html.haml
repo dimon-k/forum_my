@@ -1,0 +1,13 @@
+- @posts.each do |post|
+	.posts
+		%h3.title= link_to post.title, post
+		%p.add_info
+			Published
+			= time_ago_in_words(post.created_at)
+			ago.
+		%p.add_info
+			Contains
+			= post.comments.count
+			comments.
+		.align_left
+			= link_to "Delete post", post_path(post), :class => "button", method: :delete if current_user && ( session[:user_id] == post.user_id || current_user.admin? )

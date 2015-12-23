@@ -1,0 +1,9 @@
+.center
+	%h2 Log In form
+	= form_for(:session, url: login_path) do |f|
+		%p Email
+		= f.email_field :email, :class => "input_field", :placeholder => "Email"
+		%p Password
+		= f.password_field :password, :class => "input_field", :placeholder => "Password"
+		.align_center
+			= f.submit "Log in"

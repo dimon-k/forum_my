@@ -1,0 +1,27 @@
+!!!
+%html
+	%head
+		%title Dmitriy's Forum
+		= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+		= javascript_include_tag 'application', 'data-turbolinks-track' => true
+		= csrf_meta_tags
+		%link{:rel => "stylesheet", :href => "https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css"}
+		%link{:href => 'https://fonts.googleapis.com/css?family=Poiret+One', :rel => 'stylesheet', :type => 'text/css'}
+		%link{:href => 'https://fonts.googleapis.com/css?family=Titillium+Web:400,600', :rel => 'stylesheet', :type => 'text/css'}
+
+	%body
+		#menu_bar
+			%h1#logo=link_to "DMITRIY'S FORUM", root_path
+			- if current_user
+				%ul.menu
+					%link= current_user.email
+					%li= link_to "New post", new_post_path, :class => "button"
+					%li= link_to "Home", root_path, :class => "button"
+					%li= link_to "Log out", logout_path, method: "delete", :class => "button"
+			- else
+				%ul.menu
+					%li= link_to "Home", root_path, :class => "button"
+					%li= link_to "Sign Up", signup_path, :class => "button"
+					%li= link_to "Log In", login_path, :class => "button"
+		#content		
+			= yield

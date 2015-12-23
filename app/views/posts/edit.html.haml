@@ -1,0 +1,7 @@
+%h1 Edit post:
+= simple_form_for @post do |f|
+	%h2 Title
+	= f.text_field :title
+	%p Content
+	= f.text_area :post
+	= f.submit "Update"

@@ -1,0 +1,8 @@
+%h1 New post:
+= simple_form_for @post do |p|
+	%P Title 
+	= p.text_field :title
+	%p Content
+	= p.text_area :post
+	%br
+	= p.submit "Create"

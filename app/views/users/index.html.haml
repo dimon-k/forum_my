@@ -1,0 +1,17 @@
+%h2 All users!
+- @users.each do |user|
+	%p 
+		First name: 
+		= user.first_name
+	%p 
+		Last name: 
+		= user.last_name
+	%p 
+		Email: 
+		= user.email
+	- if current_user && session[:user_id] == user.id && current_user.admin?
+		%p It's you - ADMIN!
+	- elsif current_user && session[:user_id] == user.id
+		%p It's you!
+	- else
+		= link_to "Delete User", user_path(user), :class => "button", method: :delete

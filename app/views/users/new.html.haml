@@ -1,0 +1,13 @@
+.center
+	%h2 Sign Up form
+	= simple_form_for @user do |f|
+		%p First name
+		= f.text_field :first_name, :class => "input_field"
+		%p Last name
+		= f.text_field :last_name, :class => "input_field"
+		%p Email
+		= f.text_field :email, :class => "input_field"
+		%p Password
+		= f.text_field :password, :class => "input_field"
+		.align_center
+			= f.submit "Sign Up"

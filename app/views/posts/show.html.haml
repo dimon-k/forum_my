@@ -1,0 +1,29 @@
+.post
+	%h2= @post.title
+	%p= @post.post
+	%p.add_info
+		Created at: 
+		= @post.created_at 
+		by:
+		= @post.user.email
+	- if current_user && ( session[:user_id] == @post.user_id || current_user.admin? )
+		.align_center
+			= link_to "Delete post", post_path, :class => "button", method: :delete
+			= link_to "Update post", edit_post_path, :class => "button"
+
+.comment
+	- @comments.each do |comment|
+		%p= comment.comment
+		%p.add_info
+			Commented 
+			= time_ago_in_words(comment.created_at) 
+			ago, by: 
+			= comment.user.email
+		.align_left
+			= link_to "Delete comment", [comment.post, comment], :class => "button", method: :delete if current_user && ( session[:user_id] == comment.user_id || current_user.admin? )
+	- if current_user
+		%h4.align_righ Add new comment:
+		= simple_form_for([@post, @post.comments.build]) do |comment|
+			= comment.text_area :comment
+			.align_righ
+				= comment.submit "Add comment"
